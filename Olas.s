@@ -56,4 +56,4 @@ end_loop:
 
     @ Restaurar registros y salir
     POP {R4, R5, R6, R7, PC}
-
+.section .note.GNU-stack
