@@ -52,3 +52,4 @@ end_loop:
     @ Restaurar registros y salir
     pop {r4, r5, r6, r7, lr}
     bx lr
+    .section .note.GNU-stack
