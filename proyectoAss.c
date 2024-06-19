@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <sys/select.h>
 #include <sys/time.h>
-#include "assembly_functions.h"
+//#include "assembly_functions.h"
 
 #define CLEAR "clear"
 
@@ -19,17 +19,30 @@
 #define TECLA_BACKSPACE 8
 #define LONGITUD_CLAVE 5
 
+/*
+ bl disp_binary2
+    mov r0, r1
+    bl delay
+
+    mov r0, r3
+    bl disp_binary2
+    mov r0, r1
+    bl delay
+*/
+
+extern void *parpadeoAlternado();
+extern void *olaOceanica(void);
 void mostrarMenu();
 
 int my_getch(void);
 
 int kbhit(void);
 
-void delay(unsigned long int *);
+void delay();
 
 void ocultarEntrada(char *clave, int longitud);
 
-void disp_binary(int);
+void disp_binary();
 
 int leds(int num);
 
@@ -72,8 +85,8 @@ int leds(int num) {
     return 0;
 }
 
-void delay(unsigned long int *velocidad) {
-
+void delay() {
+/*
     initscr();
     cbreak();
     noecho();
@@ -87,11 +100,11 @@ void delay(unsigned long int *velocidad) {
     }
     if (*velocidad > 200 && ch == KEY_UP) {    // ASCII de la 'u'
         *velocidad -= 200;
-    }
+    }*/
 
-    usleep(*velocidad * 1000);   // Retardo ajustado
+    usleep(500 * 1000);   // Retardo ajustado
 
-    endwin();
+
 }
 void AutoFantastico(void) {
     unsigned long int speed1 = 500;
@@ -315,7 +328,7 @@ int main() {
                     break;
             }
 
-            system(CLEAR); // Limpiar la pantalla antes de mostrar el menu nuevamente
+            //system(CLEAR); // Limpiar la pantalla antes de mostrar el menu nuevamente
             printf("\n\n\tPresione Enter para continuar...");
             getchar(); // Espera a que el usuario presione Enter
 
@@ -324,7 +337,7 @@ int main() {
                 break;
             }
 
-            system(CLEAR); // Limpiar la pantalla antes de mostrar el menu nuevamente
+            //system(CLEAR); // Limpiar la pantalla antes de mostrar el menu nuevamente
         } while (1);
     } else {
         printf("\n\n\tHa sobrepasado el número máximo de intentos permitidos\n");
@@ -367,11 +380,19 @@ void ocultarEntrada(char *clave, int longitud) {
     tcsetattr(STDIN_FILENO, TCSANOW, &newt);
 }
 
+void disp_binary2(){
+    printf("Estoy aca qliado");
+    
+    }
+
 void disp_binary(int i) {
+    
     int t;
-    for (t = 128; t > 0; t = t / 2)
+    printf("%d ",t);
+    /*for (t =128; t > 0; t = t / 2)
         if (i & t) printw("*");
-        else printw("_");
-    printw("\n");
-    leds(i);
+        else printw("_");*/
+    fflush(stdout);
+    printw("\r");
+    
 }
